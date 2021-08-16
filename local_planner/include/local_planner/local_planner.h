@@ -33,7 +33,7 @@ class StarPlanner;
 class TreeNode;
 
 class LocalPlanner {
- private:
+ protected:
   int children_per_node_;
   int n_expanded_nodes_;
   int min_num_points_per_cell_ = 3;

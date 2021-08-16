@@ -36,7 +36,8 @@ void LocalPlanner::dynamicReconfigureSetParams(avoidance::LocalPlannerNodeConfig
   timeout_termination_ = config.timeout_termination_;
   children_per_node_ = config.children_per_node_;
   n_expanded_nodes_ = config.n_expanded_nodes_;
-  smoothing_margin_degrees_ = static_cast<float>(config.smoothing_margin_degrees_);
+  smoothing_margin_degrees_ =
+      static_cast<float>(config.smoothing_margin_degrees_);
 
   if (getGoal().z() != config.goal_z_param) {
     auto goal = getGoal();
@@ -162,7 +163,8 @@ void LocalPlanner::updateObstacleDistanceMsg(Histogram hist) {
     float dist = hist.get_dist(0, j);
 
     // is bin inside FOV?
-    if (histogramIndexYawInsideFOV(fov_fcu_frame_, j, position_, yaw_fcu_frame_deg_)) {
+    //! remove fov check for now
+    if (true) {
       msg.ranges.push_back(dist > min_sensor_range_ ? dist : max_sensor_range_ + 0.01f);
     } else {
       msg.ranges.push_back(NAN);

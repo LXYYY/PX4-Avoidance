@@ -9,3 +9,7 @@
 coverage_html/*
 repo_total.info
 */build/*
+
+.ccls-cache
+compile_commands.json
+.vscode
