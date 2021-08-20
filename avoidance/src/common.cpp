@@ -146,7 +146,7 @@ float indexAngleDifference(float a, float b) {
 
 PolarPoint histogramIndexToPolar(int e, int z, int res, float radius) {
   // ALPHA_RES%2=0 as per definition, see histogram.h
-  PolarPoint p_pol(static_cast<float>(e * res + res / 2 - 90), static_cast<float>(z * res + res / 2 - 180), radius);
+  PolarPoint p_pol(static_cast<float>(e * res + res / 2 - 90), static_cast<float>(z * res - 180), radius);
   return p_pol;
 }
 
@@ -183,7 +183,8 @@ Eigen::Vector2i polarToHistogramIndex(const PolarPoint& p_pol, int res) {
   ev2.y() = static_cast<int>(floor(p_wrapped.e / res + 90.0f / res));
   // azimuth angle to x-axis histogram index
   // maps elevation -180° to bin 0 and +180° to the highest bin (N-1)
-  ev2.x() = static_cast<int>(floor(p_wrapped.z / res + 180.0f / res));
+  ev2.x() =
+      static_cast<int>(floor((p_wrapped.z + res / 2) / res + 180.0f / res));
 
   // clamp due to floating point errros
   if (ev2.x() >= 360 / res) ev2.x() = 360 / res - 1;
