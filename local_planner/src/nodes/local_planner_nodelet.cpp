@@ -198,6 +198,7 @@ void LocalPlannerNodelet::updatePlannerInfo() {
 
 void LocalPlannerNodelet::positionCallback(const geometry_msgs::PoseStamped& msg) {
   last_position_ = newest_position_;
+  last_orientation_ = newest_orientation_;
   newest_position_ = toEigen(msg.pose.position);
   newest_orientation_ = toEigen(msg.pose.orientation);
 
